@@ -128,7 +128,7 @@ function render_full_auction(rows) {
 }
 
 function remove_suit_symbol(suit) {
-  return suit.replace(/[shdc♠♥♦♣]/gi, '').trim();
+  return suit.replace(/[shdc♠♥♦♣] /gi, '').trim();
 }
 
 function render_md_tables() {
@@ -179,10 +179,16 @@ function render_cell(cell, is_header) {
     if (border != 'no')
       attr += ' class="' + border + '"';
   }
+  cell = cell.replace(regex, '');
+  if (cell.match(/[♠S] .* [♥H] .* [♦D] .* [♣C] .*/)) {
+    cell = remove_suit_symbol(cell);
+    console.log(cell);
+    cell = hand_to_html_line(cell);
+  }
   if (is_header) {
-    return '<th ' + attr + '>' +  cell.replace(regex, '') + '</th>';
+    return '<th ' + attr + '>' +  cell + '</th>';
   } else {
-    return '<td ' + attr + '>' +  cell.replace(regex, '') + '</td>';
+    return '<td ' + attr + '>' +  cell + '</td>';
   }
 }
 
@@ -219,6 +225,27 @@ function hand_to_html(hand) {
          <clubs>C</clubs> <br/>
        </abbr>
      </td>`;
+  return html
+    .replace(/\bS\b/, suits[0])
+    .replace(/\bH\b/, suits[1])
+    .replace(/\bD\b/, suits[2])
+    .replace(/\bC\b/, suits[3]);
+}
+
+function hand_to_html_line(hand) {
+  hcp = count_points(hand);
+
+  suits = hand.replace(/10/g, 'T').split(' ');
+  for (s in suits) {
+    len = suits[s].length;
+    suits[s] = suits[s]
+      .replace(/./g, function (x) { return '&thinsp;' + x; })
+      .replace(/\bT\b/g, '10');
+  }
+  html = `
+       <abbr title='${hcp} points'>
+         <spades>S</spades> <hearts>H</hearts> <diamonds>D</diamonds> <clubs>C</clubs>
+       </abbr>`;
   return html
     .replace(/\bS\b/, suits[0])
     .replace(/\bH\b/, suits[1])
