@@ -1,0 +1,141 @@
+@font-face {
+  font-family: DejaVu;
+  src: url('DejaVu.ttf');
+}
+
+body {
+  color: black;
+  background-color: white;
+  font-family: DejaVu;
+}
+
+/* Table of contents */
+.toc_h2:before {
+  content: '\a';
+  white-space: pre;
+}
+.toc_h2 {
+  text-decoration: none;
+}
+.toc_h3:before {
+  content: '\a       ';
+  white-space: pre;
+}
+.toc_h3 {
+  text-decoration: none;
+}
+.toc_h4:before {
+  content: '\a             ';
+  white-space: pre;
+}
+.toc_h4 {
+  text-decoration: none;
+}
+
+/* Numbering sections */
+h2:before {
+  content: counter(section) ' ';
+}
+h2 {
+  font-size: 130%;
+  counter-increment: section;
+  counter-reset: subsection;
+}
+h3:before {
+  content: counter(section) '.' counter(subsection) ' ';
+}
+h3 {
+  font-size: 120%;
+  counter-increment: subsection;
+  counter-reset: subsubsection;
+}
+h4:before {
+  content: counter(section) '.' counter(subsection) '.' counter(subsubsection) ' ';
+}
+h4 {
+  font-size: 110%;
+  counter-increment: subsubsection;
+  counter-reset: subsubsubsection;
+}
+h5:before {
+  content: counter(section) '.' counter(subsection) '.' counter(subsubsection) '.' counter(subsubsubsection) ' ';
+}
+h5 {
+  font-size: 100%;
+  counter-increment: subsubsubsection;
+}
+
+/* Coloring suit symbols */
+spades:before {
+  color: black;
+  content: '♠';
+}
+hearts:before {
+  color: #dd0000;
+  content: '♥';
+}
+diamonds:before {
+  color: #dd0000;
+  content: '♦';
+}
+clubs:before {
+  color: black;
+  content: '♣';
+}
+
+/* Styling tooltips, e.g. point count */
+abbr {
+  border: none;
+  text-decoration: none;
+}
+
+/* Styling tables */
+table {
+  margin-top: 1em;
+}
+th, td {
+  font-weight: normal;
+  line-height: 1.2;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Styling markdown tables */
+table.null th {
+  text-align: left;
+  border-bottom: 1px solid #555;
+}
+table.null td {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Styling bid-matrix tables */
+table.matrix, table.matrix th, table.matrix td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+table.matrix td.fill {
+  background-color: gainsboro;
+}
+table.matrix td.no-bot {
+  border-bottom: 1px solid white;
+}
+table.matrix td.no-top {
+  border-top: 2px solid white;
+}
+table.matrix td.no-bot-top {
+  border-bottom: 1px solid white;
+  border-top: 2px solid white;
+}
+
+/* Styling auction tables */
+table.auction td.hand {
+  width: 1.4in;
+}
+table.auction td.bid-cmt {
+  width: 2.4in;
+}
