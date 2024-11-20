@@ -6,6 +6,7 @@ function initialize() {
 
 function render_text() {
   walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+  headings = [];
   while (walker.nextNode()) {
     if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'TH', 'TD'].includes(walker.currentNode.tagName)) {
       //console.log(walker.currentNode);
@@ -13,8 +14,22 @@ function render_text() {
       html = replace_suit_symbols(html);
       html = replace_markdown(html);
       walker.currentNode.innerHTML = html;
+
+      if (['H2', 'H3', 'H4'].includes(walker.currentNode.tagName)) {
+        walker.currentNode.id = 'heading_' + headings.length;
+        headings.push('<a class="toc_' + walker.currentNode.tagName.toLowerCase() + '" href="#' +
+                      walker.currentNode.id + '">' + html + '</a>');
+      }
     }
   }
+  num_columns = 3;
+  height = (headings.length + num_columns - 1) / num_columns;
+  toc = '<table>';
+  for (i = 0; i < num_columns; ++i) {
+    toc += '<td>' + headings.slice(i * height, (i+1) * height).join('\n') + '</td>';
+  }
+  toc += '</table>';
+  document.getElementById('toc').innerHTML = toc;
 }
 
 function replace_suit_symbols(text) {
@@ -182,7 +197,6 @@ function render_cell(cell, is_header) {
   cell = cell.replace(regex, '');
   if (cell.match(/[♠S] .* [♥H] .* [♦D] .* [♣C] .*/)) {
     cell = remove_suit_symbol(cell);
-    console.log(cell);
     cell = hand_to_html_line(cell);
   }
   if (is_header) {
