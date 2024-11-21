@@ -41,7 +41,11 @@ function replace_suit_symbols(text) {
     .replace(/([1-7])S\b/gi, function(x, y) { return y + '<spades></spades>'; })
     .replace(/([1-7])H\b/gi, function(x, y) { return y + '<hearts></hearts>'; })
     .replace(/([1-7])D\b/gi, function(x, y) { return y + '<diamonds></diamonds>'; })
-    .replace(/([1-7])C\b/gi, function(x, y) { return y + '<clubs></clubs>'; });
+    .replace(/([1-7])C\b/gi, function(x, y) { return y + '<clubs></clubs>'; })
+    .replace(/\bS([2-9TJQKA]+\b)/gi, function(x, y) { return '<spades></spades>' + y; })
+    .replace(/\bH([2-9TJQKA]+\b)/gi, function(x, y) { return '<hearts></hearts>' + y; })
+    .replace(/\bD([2-9TJQKA]+\b)/gi, function(x, y) { return '<diamonds></diamonds>' + y; })
+    .replace(/\bC([2-9TJQKA]+\b)/gi, function(x, y) { return '<clubs></clubs>' + y; });
 }
 
 function replace_markdown(text) {
