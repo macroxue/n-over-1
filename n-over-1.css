@@ -116,6 +116,17 @@ table.null td {
   padding-bottom: 0;
 }
 
+/* Styling numeric tables */
+table.numeric th {
+  text-align: right;
+  border-bottom: 1px solid #555;
+}
+table.numeric td {
+  text-align: right;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 /* Styling bid-matrix tables */
 table.matrix, table.matrix th, table.matrix td {
   border: 1px solid black;
