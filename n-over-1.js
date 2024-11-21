@@ -23,7 +23,8 @@ function render_text() {
     }
   }
   num_columns = 3;
-  height = (headings.length + num_columns - 1) / num_columns;
+  height = Math.floor((headings.length + num_columns - 1) / num_columns);
+  console.log(headings.length, height);
   toc = '<table>';
   for (i = 0; i < num_columns; ++i) {
     toc += '<td>' + headings.slice(i * height, (i+1) * height).join('\n') + '</td>';
