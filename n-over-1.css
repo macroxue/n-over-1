@@ -8,6 +8,9 @@ body {
   color: black;
   font-family: DejaVu;
   line-height: 1.5;
+
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 /* Table of contents */
