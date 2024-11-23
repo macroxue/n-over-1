@@ -24,7 +24,6 @@ function render_text() {
   }
   num_columns = 3;
   height = Math.ceil(headings.length / num_columns);
-  console.log(headings.length, height);
   toc = '<table>';
   for (i = 0; i < num_columns; ++i) {
     toc += '<td>' + headings.slice(i * height, (i+1) * height).join('\n') + '</td>';
@@ -98,7 +97,7 @@ function render_pair_auction(rows) {
 
   // Vertical layout.
   return '<table class="auction" align="center">' +
-    '<tr>' + hand_to_html(hand[0]) + hand_to_html(hand[1]) + '</tr>' +
+    '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>' +
     '<tr>' +
     '<td class="bid-cmt">' + bids[0] + '</td>' +
     '<td class="bid-cmt">' + bids[1] + '</td>' +
