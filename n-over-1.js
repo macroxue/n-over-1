@@ -23,7 +23,7 @@ function render_text() {
     }
   }
   num_columns = 3;
-  height = Math.floor((headings.length + num_columns - 1) / num_columns);
+  height = Math.ceil(headings.length / num_columns);
   console.log(headings.length, height);
   toc = '<table>';
   for (i = 0; i < num_columns; ++i) {
