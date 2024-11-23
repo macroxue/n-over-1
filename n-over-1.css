@@ -149,6 +149,7 @@ table.matrix td.no-bot-top {
 
 /* Styling auction tables */
 table.auction td.hand {
+  vertical-align: middle;
   width: 1.4in;
 }
 table.auction td.bid-cmt {
