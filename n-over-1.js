@@ -231,8 +231,8 @@ function hand_to_html(hand) {
       .replace(/./g, function (x) { return '&thinsp;' + x; })
       .replace(/\bT\b/g, '10');
     if (len >= 8) {
-      percent = 100 - (len - 7) * 6;
-      suits[s] = '<small style="font-size:' + percent + '%">' + suits[s] + '</small>';
+      space = len <= 9 ? -1 : -2;
+      suits[s] = '<font style="letter-spacing:' + space + 'px">' + suits[s] + '</font>';
     }
   }
   html = `
