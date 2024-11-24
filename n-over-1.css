@@ -13,6 +13,17 @@ body {
   -webkit-print-color-adjust: exact;
 }
 
+/* Printing page setup */
+h2 {
+  page-break-before: always;
+}
+h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
+.auction {
+  page-break-inside: avoid;
+}
+
 /* Table of contents */
 .toc_h2:before {
   content: '\a';
@@ -38,10 +49,10 @@ body {
 
 /* Numbering sections */
 h2:before {
-  content: counter(section) ' ';
+  content: '第' counter(section) '章 ';
 }
 h2 {
-  font-size: 130%;
+  font-size: 140%;
   counter-increment: section;
   counter-reset: subsection;
 }
@@ -118,13 +129,15 @@ table.null td {
 
 /* Styling numeric tables */
 table.numeric th {
-  text-align: right;
   border-bottom: 1px solid #555;
+  font-size: 95%;
+  text-align: right;
 }
 table.numeric td {
-  text-align: right;
+  font-size: 95%;
   padding-top: 0;
   padding-bottom: 0;
+  text-align: right;
 }
 
 /* Styling bid-matrix tables */
