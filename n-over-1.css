@@ -70,19 +70,19 @@ h5 {
 }
 
 /* Coloring suit symbols */
-spades:before {
+ss:before {
   color: black;
   content: '♠';
 }
-hearts:before {
+hs:before {
   color: #dd0000;
   content: '♥';
 }
-diamonds:before {
+ds:before {
   color: #dd0000;
   content: '♦';
 }
-clubs:before {
+cs:before {
   color: black;
   content: '♣';
 }

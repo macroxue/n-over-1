@@ -34,18 +34,18 @@ function render_text() {
 
 function replace_suit_symbols(text) {
   return text.replace(/\bnt\b/gi, 'NT')
-    .replace(/(\bS\b|♠)/gi, '<spades></spades>')
-    .replace(/(\bH\b|♥)/gi, '<hearts></hearts>')
-    .replace(/(\bD\b|♦)/gi, '<diamonds></diamonds>')
-    .replace(/(\bC\b|♣)/gi, '<clubs></clubs>')
-    .replace(/([1-7])S\b/gi, function(x, y) { return y + '<spades></spades>'; })
-    .replace(/([1-7])H\b/gi, function(x, y) { return y + '<hearts></hearts>'; })
-    .replace(/([1-7])D\b/gi, function(x, y) { return y + '<diamonds></diamonds>'; })
-    .replace(/([1-7])C\b/gi, function(x, y) { return y + '<clubs></clubs>'; })
-    .replace(/\bS([2-9TJQKA]+\b)/gi, function(x, y) { return '<spades></spades>' + y; })
-    .replace(/\bH([2-9TJQKA]+\b)/gi, function(x, y) { return '<hearts></hearts>' + y; })
-    .replace(/\bD([2-9TJQKA]+\b)/gi, function(x, y) { return '<diamonds></diamonds>' + y; })
-    .replace(/\bC([2-9TJQKA]+\b)/gi, function(x, y) { return '<clubs></clubs>' + y; });
+    .replace(/(\bS\b|♠)/gi, '<ss></ss>')
+    .replace(/(\bH\b|♥)/gi, '<hs></hs>')
+    .replace(/(\bD\b|♦)/gi, '<ds></ds>')
+    .replace(/(\bC\b|♣)/gi, '<cs></cs>')
+    .replace(/([1-7])S\b/gi, function(x, y) { return y + '<ss></ss>'; })
+    .replace(/([1-7])H\b/gi, function(x, y) { return y + '<hs></hs>'; })
+    .replace(/([1-7])D\b/gi, function(x, y) { return y + '<ds></ds>'; })
+    .replace(/([1-7])C\b/gi, function(x, y) { return y + '<cs></cs>'; })
+    .replace(/\bS([2-9TJQKA]+\b)/gi, function(x, y) { return '<ss></ss>' + y; })
+    .replace(/\bH([2-9TJQKA]+\b)/gi, function(x, y) { return '<hs></hs>' + y; })
+    .replace(/\bD([2-9TJQKA]+\b)/gi, function(x, y) { return '<ds></ds>' + y; })
+    .replace(/\bC([2-9TJQKA]+\b)/gi, function(x, y) { return '<cs></cs>' + y; });
 }
 
 function replace_markdown(text) {
@@ -237,10 +237,10 @@ function hand_to_html(hand) {
   html = `
      <td class='hand'>
        <abbr title='${hcp} points'>
-         <spades>S</spades> <br/>
-         <hearts>H</hearts> <br/>
-         <diamonds>D</diamonds> <br/>
-         <clubs>C</clubs> <br/>
+         <ss>S</ss> <br/>
+         <hs>H</hs> <br/>
+         <ds>D</ds> <br/>
+         <cs>C</cs> <br/>
        </abbr>
      </td>`;
   return html
@@ -262,7 +262,7 @@ function hand_to_html_line(hand) {
   }
   html = `
        <abbr title='${hcp} points'>
-         <spades>S</spades> <hearts>H</hearts> <diamonds>D</diamonds> <clubs>C</clubs>
+         <ss>S</ss> <hs>H</hs> <ds>D</ds> <cs>C</cs>
        </abbr>`;
   return html
     .replace(/\bS\b/, suits[0])
