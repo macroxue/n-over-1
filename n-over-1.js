@@ -81,6 +81,12 @@ function render_md_auction(md_auction) {
     return render_full_auction(rows);
 }
 
+function align_bid_cmt(bid_cmt) {
+  space = bid_cmt.includes('NT') ? ' &thinsp; ' :
+    bid_cmt.includes('不叫') ? ' &nbsp; ' : ' &ensp;&nbsp; ';
+  return bid_cmt.replace(/ - /, space);
+}
+
 function render_pair_auction(rows) {
   hands = ['', ''];
   for (row of rows.slice(0, 4)) {
@@ -90,7 +96,7 @@ function render_pair_auction(rows) {
   }
   bids = ['', ''];
   for (row of rows.slice(4)) {
-    items = row.trim().split('|');
+    items = row.trim().split('|').map(b => align_bid_cmt(b));
     bids[0] = bids[0] == '' ? items[0] : bids[0] + '<br/>' + items[0];
     if (items.length > 1)
       bids[1] = bids[1] == '' ? items[1] : bids[1] + '<br/>' + items[1];
