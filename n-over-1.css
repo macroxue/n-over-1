@@ -10,6 +10,7 @@ body {
   line-height: 1.5;
   margin: auto;
   max-width: 960px;
+  padding: 0.2in 0.2in;
 
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
@@ -32,9 +33,6 @@ div#cover {
 }
 
 /* Table of contents */
-h1#toc_h1 {
-  font-size: 140%;
-}
 .toc_h2:before {
   content: '\a';
   white-space: pre;
@@ -58,11 +56,18 @@ h1#toc_h1 {
 }
 
 /* Numbering sections */
+h1, h2 {
+  border-bottom: 1px solid;
+  font-size: 200%;
+  font-weight: lighter;
+  margin-bottom: 1.0in;
+  margin-top: 1.0in;
+  text-align: center;
+}
 h2:before {
   content: '第' counter(section) '章 ';
 }
 h2 {
-  font-size: 140%;
   counter-increment: section;
   counter-reset: subsection;
 }
