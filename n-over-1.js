@@ -1,4 +1,11 @@
+var use_horizontal_layout = true;
+
 function initialize() {
+  url_params = new URLSearchParams(window.location.search);
+  if (url_params.get('v') != null) {
+    use_horizontal_layout = false;
+  }
+
   render_md_auctions();
   render_md_tables();
   render_text();
@@ -88,20 +95,22 @@ function render_pair_auction(rows) {
     if (items.length > 1)
       bids[1] = bids[1] == '' ? items[1] : bids[1] + '<br/>' + items[1];
   }
-  // Horizontal layout.
-  return '<table class="auction">' +
-    '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) +
-    '<td class="bid-cmt">' + bids[0] + '</td>' +
-    '<td class="bid-cmt">' + bids[1] + '</td>' +
-    '</tr> </table>';
-
-  // Vertical layout.
-  return '<table class="auction" align="center">' +
-    '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>' +
-    '<tr>' +
-    '<td class="bid-cmt">' + bids[0] + '</td>' +
-    '<td class="bid-cmt">' + bids[1] + '</td>' +
-    '</tr> </table>';
+  if (use_horizontal_layout) {
+    // Horizontal layout.
+    return '<table class="auction">' +
+      '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) +
+      '<td class="bid-cmt">' + bids[0] + '</td>' +
+      '<td class="bid-cmt">' + bids[1] + '</td>' +
+      '</tr> </table>';
+  } else {
+    // Vertical layout.
+    return '<table class="auction" align="center">' +
+      '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>' +
+      '<tr>' +
+      '<td class="bid-cmt">' + bids[0] + '</td>' +
+      '<td class="bid-cmt">' + bids[1] + '</td>' +
+      '</tr> </table>';
+  }
 }
 
 function render_full_auction(rows) {
