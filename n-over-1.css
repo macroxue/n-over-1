@@ -68,34 +68,34 @@ h1, h2 {
   text-align: center;
 }
 h2:before {
-  content: '第' counter(section) '章 ';
+  content: '第' counter(h2) '章 ';
 }
 h2 {
-  counter-increment: section;
-  counter-reset: subsection;
+  counter-increment: h2;
+  counter-reset: h3;
 }
 h3:before {
-  content: counter(section) '.' counter(subsection) ' ';
+  content: counter(h2) '.' counter(h3) ' ';
 }
 h3 {
   font-size: 120%;
-  counter-increment: subsection;
-  counter-reset: subsubsection;
+  counter-increment: h3;
+  counter-reset: h4;
 }
 h4:before {
-  content: counter(section) '.' counter(subsection) '.' counter(subsubsection) ' ';
+  content: counter(h2) '.' counter(h3) '.' counter(h4) ' ';
 }
 h4 {
   font-size: 110%;
-  counter-increment: subsubsection;
-  counter-reset: subsubsubsection;
+  counter-increment: h4;
+  counter-reset: h5;
 }
 h5:before {
-  content: counter(section) '.' counter(subsection) '.' counter(subsubsection) '.' counter(subsubsubsection) ' ';
+  content: counter(h2) '.' counter(h3) '.' counter(h4) '.' counter(h5) ' ';
 }
 h5 {
   font-size: 100%;
-  counter-increment: subsubsubsection;
+  counter-increment: h5;
 }
 
 /* Coloring suit symbols */
