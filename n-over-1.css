@@ -33,6 +33,9 @@ div#cover {
 }
 
 /* Table of contents */
+#toc {
+  columns: 2;
+}
 .toc_h2:before {
   content: '\a';
   white-space: pre;

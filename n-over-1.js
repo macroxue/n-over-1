@@ -29,14 +29,8 @@ function render_text() {
       }
     }
   }
-  num_columns = 3;
-  height = Math.ceil(headings.length / num_columns);
-  toc = '<table>';
-  for (i = 0; i < num_columns; ++i) {
-    toc += '<td>' + headings.slice(i * height, (i+1) * height).join('\n') + '</td>';
-  }
-  toc += '</table>';
-  document.getElementById('toc').innerHTML = toc;
+
+  document.getElementById('toc').innerHTML = headings.join('\n');
 }
 
 function replace_suit_symbols(text) {
