@@ -12,6 +12,13 @@
   }
 }
 
+#heading_0 {
+  page: content_start;
+}
+@page content_start {
+  counter-reset: page_num;
+}
+
 /* Print with background color */
 body {
   font-size: 90%;
