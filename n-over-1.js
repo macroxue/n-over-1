@@ -219,6 +219,14 @@ function render_cell(cell, is_header) {
   }
 }
 
+function check_hand(hand) {
+  cards = hand.replace(/[ -]/g, '');
+  if (cards.length != 13)
+    console.log('ERROR: ' + cards.length + ' cards with ' + hand);
+  if (cards.match(/[x2-9TJQKA]/g).length != 13)
+    console.log('ERROR: invalid cards in ' + hand);
+}
+
 function count_points(hand) {
   hcp = 0;
   for (i = 0; i < hand.length; ++i) {
@@ -229,7 +237,7 @@ function count_points(hand) {
 }
 
 function hand_to_html(hand) {
-  //hand = hand.toUpperCase();
+  check_hand(hand);
   hcp = count_points(hand);
 
   suits = hand.replace(/10/g, 'T').split(' ');
@@ -260,6 +268,7 @@ function hand_to_html(hand) {
 }
 
 function hand_to_html_line(hand) {
+  check_hand(hand);
   hcp = count_points(hand);
 
   suits = hand.replace(/10/g, 'T').split(' ');
