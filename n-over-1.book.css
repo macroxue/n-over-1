@@ -1,3 +1,17 @@
+/* Page setup */
+@page:first {
+  counter-increment: page_num 0;
+  @bottom-center {
+    content: normal;
+  }
+}
+@page {
+  counter-increment: page_num;
+  @bottom-center {
+    content: counter(page_num);
+  }
+}
+
 /* Print with background color */
 body {
   print-color-adjust: exact;
@@ -7,6 +21,9 @@ body {
 /* Table of contents */
 #toc {
   columns: 1;
+}
+.toc_h2:after, .toc_h3:after, .toc_h4:after, .toc_h5:after {
+  content: leader('.') target-counter(attr(href), page_num);
 }
 
 /* Page breaks */
