@@ -1,9 +1,9 @@
-var use_horizontal_layout = true;
+var use_horizontal_layout = false;
 
 function initialize() {
   url_params = new URLSearchParams(window.location.search);
-  if (url_params.get('v') != null) {
-    use_horizontal_layout = false;
+  if (url_params.get('h') != null) {
+    use_horizontal_layout = true;
   }
 
   render_md_auctions();
