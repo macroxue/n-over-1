@@ -6,6 +6,7 @@
   }
 }
 @page {
+  size: letter;
   counter-increment: page_num;
   @bottom-center {
     content: counter(page_num);
