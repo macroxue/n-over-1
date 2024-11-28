@@ -132,6 +132,8 @@ abbr {
 
 /* Styling tables */
 table {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1em;
 }
 th, td {
@@ -185,9 +187,6 @@ table.matrix td.no-bot-top {
 }
 
 /* Styling auction tables */
-table.auction {
-  margin: auto;
-}
 table.auction td.hand {
   vertical-align: middle;
   width: 1.4in;
