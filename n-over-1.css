@@ -2,11 +2,15 @@
   font-family: DejaVu;
   src: url('DejaVu.ttf');
 }
+@font-face {
+  font-family: NotoSansSC;
+  src: url('NotoSansSC-Regular.ttf');
+}
 
 body {
   background-color: white;
   color: black;
-  font-family: DejaVu;
+  font-family: DejaVu, NotoSansSC;
   line-height: 1.5;
   margin: auto;
   max-width: 960px;
