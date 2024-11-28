@@ -15,6 +15,10 @@ body {
   margin: auto;
   max-width: 960px;
   padding: 0.2in 0.2in;
+
+  /* Browser print with background color */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 /* Cover */

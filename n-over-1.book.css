@@ -19,11 +19,9 @@
   counter-reset: page_num;
 }
 
-/* Print with background color */
+/* Reduce font size for a better fit */
 body {
   font-size: 90%;
-  print-color-adjust: exact;
-  -webkit-print-color-adjust: exact;
 }
 
 /* Table of contents */
