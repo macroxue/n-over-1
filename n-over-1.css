@@ -119,6 +119,11 @@ cs:before {
   content: '♣';
 }
 
+/* Styling figures */
+#contract-points {
+  display: flex;
+}
+
 /* Styling tooltips, e.g. point count */
 abbr {
   border: none;

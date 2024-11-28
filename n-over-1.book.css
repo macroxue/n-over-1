@@ -36,3 +36,11 @@ h2, h3, h4, h5 {
 .auction {
   page-break-inside: avoid;
 }
+
+/* Figures */
+#contract-points {
+  display: block;
+}
+#contract-points img {
+  width: 85%;
+}
