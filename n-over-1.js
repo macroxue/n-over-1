@@ -25,7 +25,7 @@ function render_text() {
       if (['H2', 'H3', 'H4'].includes(walker.currentNode.tagName)) {
         walker.currentNode.id = 'heading_' + headings.length;
         headings.push('<a class="toc_' + walker.currentNode.tagName.toLowerCase() + '" href="#' +
-                      walker.currentNode.id + '">' + html + '</a>');
+                      walker.currentNode.id + '">' + html + '</a><br>');
       }
     }
   }

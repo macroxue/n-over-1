@@ -36,25 +36,42 @@ div#cover {
 #toc {
   columns: 2;
 }
+.toc_h2, .toc_h3, .toc_h4, .toc_h5 {
+  line-height: 150%;
+}
 .toc_h2:before {
-  content: '\a';
+  content: '第' counter(toc_h2) '章 ';
   white-space: pre;
 }
 .toc_h2 {
+  counter-increment: toc_h2;
+  counter-reset: toc_h3;
   text-decoration: none;
 }
 .toc_h3:before {
-  content: '\a       ';
+  content: '       ' counter(toc_h2) '.' counter(toc_h3) ' ';
   white-space: pre;
 }
 .toc_h3 {
+  counter-increment: toc_h3;
+  counter-reset: toc_h4;
   text-decoration: none;
 }
 .toc_h4:before {
-  content: '\a             ';
+  content: '             ' counter(toc_h2) '.' counter(toc_h3) '.' counter(toc_h4) ' ';
   white-space: pre;
 }
 .toc_h4 {
+  counter-increment: toc_h4;
+  counter-reset: toc_h5;
+  text-decoration: none;
+}
+.toc_h5:before {
+  content: '                ' counter(toc_h2) '.' counter(toc_h3) '.' counter(toc_h4) '.' counter(toc_h5) ' ';
+  white-space: pre;
+}
+.toc_h5 {
+  counter-increment: toc_h5;
   text-decoration: none;
 }
 
