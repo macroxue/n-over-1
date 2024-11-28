@@ -1,0 +1,21 @@
+/* Print with background color */
+body {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* Table of contents */
+#toc {
+  columns: 1;
+}
+
+/* Page breaks */
+h1, h2 {
+  page-break-before: always;
+}
+h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
+.auction {
+  page-break-inside: avoid;
+}

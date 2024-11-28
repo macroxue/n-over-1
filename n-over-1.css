@@ -11,20 +11,6 @@ body {
   margin: auto;
   max-width: 960px;
   padding: 0.2in 0.2in;
-
-  print-color-adjust: exact;
-  -webkit-print-color-adjust: exact;
-}
-
-/* Printing page setup */
-h1, h2 {
-  page-break-before: always;
-}
-h2, h3, h4, h5 {
-  page-break-after: avoid;
-}
-.auction {
-  page-break-inside: avoid;
 }
 
 /* Cover */
