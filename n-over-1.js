@@ -104,7 +104,7 @@ function render_pair_auction(rows) {
       '</tr> </table>';
   } else {
     // Vertical layout.
-    return '<table class="auction" align="center">' +
+    return '<table class="auction">' +
       '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>' +
       '<tr>' +
       '<td class="bid-cmt">' + bids[0] + '</td>' +

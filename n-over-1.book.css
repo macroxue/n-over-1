@@ -45,3 +45,12 @@ h2, h3, h4, h5 {
 #contract-points img {
   width: 75%;
 }
+
+/* Auctions */
+table.auction td.hand {
+  width: 1.2in;
+}
+table.auction td.bid-cmt {
+  width: 2.1in;
+}
+
