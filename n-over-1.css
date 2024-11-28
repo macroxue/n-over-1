@@ -156,13 +156,11 @@ table.null td {
 /* Styling numeric tables */
 table.numeric th {
   border-bottom: 1px solid #555;
-  font-size: 95%;
-  text-align: right;
 }
-table.numeric td {
+table.numeric th, table.numeric td {
   font-size: 95%;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
   text-align: right;
 }
 

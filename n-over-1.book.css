@@ -14,6 +14,7 @@
 
 /* Print with background color */
 body {
+  font-size: 90%;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
 }
@@ -42,5 +43,5 @@ h2, h3, h4, h5 {
   display: block;
 }
 #contract-points img {
-  width: 85%;
+  width: 75%;
 }
