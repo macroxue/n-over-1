@@ -143,6 +143,7 @@ table {
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em;
+  white-space: nowrap;
 }
 th, td {
   font-weight: normal;
@@ -175,21 +176,31 @@ table.numeric th, table.numeric td {
 }
 
 /* Styling bid-matrix tables */
-table.matrix, table.matrix th, table.matrix td {
-  border: 1px solid black;
+table.matrix, table.matrix th, table.matrix td,
+table.dense-matrix, table.dense-matrix th, table.dense-matrix td {
+  border: 1px solid grey;
   border-collapse: collapse;
   text-align: center;
 }
-table.matrix td.fill {
+table.dense-matrix th, table.dense-matrix td {
+  font-size: 96%;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+table.matrix td.fill,
+table.dense-matrix td.fill {
   background-color: gainsboro;
 }
-table.matrix td.no-bot {
+table.matrix td.no-bot,
+table.dense-matrix td.no-bot {
   border-bottom: 1px solid white;
 }
-table.matrix td.no-top {
+table.matrix td.no-top,
+table.dense-matrix td.no-top {
   border-top: 2px solid white;
 }
-table.matrix td.no-bot-top {
+table.matrix td.no-bot-top,
+table.dense-matrix td.no-bot-top {
   border-bottom: 1px solid white;
   border-top: 2px solid white;
 }

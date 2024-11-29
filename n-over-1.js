@@ -173,8 +173,13 @@ function render_md_table(md_table) {
   xml_doc = parser.parseFromString(md_table.innerHTML, "text/xml");
   root = xml_doc.getElementsByTagName('xml')[0];
   style = root.getAttribute('style');
+  font_size = root.getAttribute('font-size');
   rows = root.childNodes[0].nodeValue.split('\n');
-  html = '<table class="' + style + '">';
+  if (font_size == null) {
+    html = '<table class="' + style + '">';
+  } else {
+    html = '<table class="' + style + '" style="font-size:' + font_size + '">';
+  }
   for (i in rows) {
     if (rows[i].trim() == '') continue;
     html += '<tr>';
