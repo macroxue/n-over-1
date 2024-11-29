@@ -235,7 +235,7 @@
 
     <h4>加叫结构的展开</h4>
 
-    <p>高花加叫之后的进程以叫牌矩阵表示如下，其中综合点代表的是联手牌力。叫牌矩阵的好处是以最小的篇幅覆盖最多的叫牌序列，在之后的体系定义中被大量使用。</p>
+    <p>高花加叫之后的进程以叫牌矩阵表示如下，其中综合点代表的是联手牌力。矩阵的列表示当前的叫牌或者叫牌序列，矩阵的行表示接下来可能的叫法。例如2NT加叫之后不可以不叫；再叫将牌或3NT都显示联手26-29综合点，但后者可以用来把庄位让给同伴；而叫出新花是扣叫控制，表示满贯兴趣。叫牌矩阵的好处是以最小的篇幅覆盖最多的叫牌序列，在之后的体系定义中还会被大量使用。</p>
 
     <script class='md-table' type='text/xmldata'> <xml style='matrix'>
                | 二阶加叫       | 三阶加叫 | 2NT加叫 | 三阶爆裂加叫 | 四阶爆裂加叫
@@ -253,7 +253,7 @@
 
     <p>以下是2NT人工加叫使用于应叫、开叫人的再叫、应叫人的再叫、以及开叫人的第三轮叫牌的例子，表示联手26+z并且加叫人手里无单缺。从这些牌例可以看出对称加叫结构简单而有效，之后还有更多牌例。</p>
 
-    <script class='md-auction' type='text/xmldata'> <xml style='compact'>
+    <p><script class='md-auction' type='text/xmldata'> <xml style='compact'>
       ♠ KQ8763                 | ♠ A42
       ♥ Q2                     | ♥ K3
       ♦ AK8                    | ♦ QJ952
@@ -262,7 +262,9 @@
       3♠ - 13-16z，低限        | 4♠ - 13-16z，低限
     </xml> </script>
 
-    <script class='md-auction' type='text/xmldata'> <xml style='compact'>
+    同伴开叫5张S，应叫人以14综合点（13大牌点）的均型牌和3张S支持做2NT逼局加叫。开叫人是低限，于是简单再叫3S，如果同伴有兴趣探索满贯，接下来可以开始扣叫控制。不过应叫人也是低限，所以简单加叫到局。</p>
+
+    <p><script class='md-auction' type='text/xmldata'> <xml style='compact'>
       ♠ A432                   | ♠ KQJ7
       ♥ K3                     | ♥ Q62
       ♦ KT8                    | ♦ 63
@@ -272,7 +274,9 @@
       4♠ - 19-22z              |
     </xml> </script>
 
-    <script class='md-auction' type='text/xmldata'> <xml style='compact'>
+    应叫人转移4张♠，开叫人持有4张支持的均型牌和21综合点（19大牌点），于是做2NT逼局加叫。应叫人没有满贯意图，可以叫3S或3NT表示低限，这里选择3NT是为了把庄位让给持强牌的同伴。开叫人当然接过庄位，止叫于4S。</p>
+
+    <p><script class='md-auction' type='text/xmldata'> <xml style='compact'>
       ♠ A42                    | ♠ KQJ763
       ♥ K3                     | ♥ Q62
       ♦ KT8                    | ♦ 63
@@ -283,7 +287,9 @@
       4♠ - 控制不足            |
     </xml> </script>
 
-    <script class='md-auction' type='text/xmldata'> <xml style='compact'>
+    应叫人转移4张♠，开叫人在一阶接受表示恰好3张S。这时应叫人的牌力因为配合而增加到13综合点（11大牌点），于是做2NT逼局加叫。开叫人以高限牌扣叫3C开始探索满贯，然而同伴接下来的扣叫表明没有红花控制，联手缺两个红花A，结果只能放弃满贯。</p>
+
+    <p><script class='md-auction' type='text/xmldata'> <xml style='compact'>
       ♠ A432                   | ♠ KQJ7
       ♥ K93                    | ♥ Q762
       ♦ KT8                    | ♦ 63
@@ -293,6 +299,8 @@
       2NT - 19+z，4=♠，无单缺  | 3♠ - 7-10z
       4♠ - 19-22z              |
     </xml> </script>
+
+    应叫人转移4张H之后又叫出4张S，开叫人恰好也有4张S，以20综合点（19大牌点）的均型牌做2NT逼局加叫。应叫人以3S表示没有满贯兴趣，开叫人于是简单进局。</p>
 
     <h3>强1NT再叫</h3>
 
