@@ -69,7 +69,7 @@ div#cover {
   text-decoration: none;
 }
 
-/* Numbering sections */
+/* Headings */
 h1, h2 {
   border-bottom: 1px solid;
   font-size: 200%;
@@ -109,7 +109,18 @@ h5 {
   counter-increment: h5;
 }
 
-/* Coloring suit symbols */
+/* Paragraphs */
+p {
+  margin: 0em;
+  text-indent: 2em;
+}
+
+/* Lists */
+ul {
+  margin: 0.5em;
+}
+
+/* Suit symbols */
 ss:before {
   color: black;
   content: '♠';
@@ -127,7 +138,7 @@ cs:before {
   content: '♣';
 }
 
-/* Styling figures */
+/* Figures */
 #contract-points {
   display: flex;
 }
@@ -138,11 +149,12 @@ abbr {
   text-decoration: none;
 }
 
-/* Styling tables */
+/* Tables */
 table {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   white-space: nowrap;
 }
 th, td {
@@ -154,7 +166,7 @@ th, td {
   vertical-align: top;
 }
 
-/* Styling markdown tables */
+/* Markdown tables */
 table.null th {
   text-align: left;
   border-bottom: 1px solid #555;
@@ -164,7 +176,7 @@ table.null td {
   padding-bottom: 0;
 }
 
-/* Styling numeric tables */
+/* Numeric tables */
 table.numeric th {
   border-bottom: 1px solid #555;
 }
@@ -175,7 +187,7 @@ table.numeric th, table.numeric td {
   text-align: right;
 }
 
-/* Styling bid-matrix tables */
+/* Bid-matrix tables */
 table.matrix, table.matrix th, table.matrix td,
 table.dense-matrix, table.dense-matrix th, table.dense-matrix td {
   border: 1px solid grey;
@@ -205,7 +217,7 @@ table.dense-matrix td.no-bot-top {
   border-top: 2px solid white;
 }
 
-/* Styling auction tables */
+/* Auction tables */
 table.auction td.hand {
   vertical-align: middle;
   width: 1.4in;
