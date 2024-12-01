@@ -36,18 +36,18 @@ function render_text() {
 
 function replace_suit_symbols(text) {
   return text.replace(/\bnt\b/gi, 'NT')
-    .replace(/(\bS\b|♠)/gi, '<ss></ss>')
-    .replace(/(\bH\b|♥)/gi, '<hs></hs>')
-    .replace(/(\bD\b|♦)/gi, '<ds></ds>')
-    .replace(/(\bC\b|♣)/gi, '<cs></cs>')
-    .replace(/([1-7])S\b/gi, function(x, y) { return y + '<ss></ss>'; })
-    .replace(/([1-7])H\b/gi, function(x, y) { return y + '<hs></hs>'; })
-    .replace(/([1-7])D\b/gi, function(x, y) { return y + '<ds></ds>'; })
-    .replace(/([1-7])C\b/gi, function(x, y) { return y + '<cs></cs>'; })
-    .replace(/\bS([2-9TJQKA]+\b)/gi, function(x, y) { return '<ss></ss>' + y; })
-    .replace(/\bH([2-9TJQKA]+\b)/gi, function(x, y) { return '<hs></hs>' + y; })
-    .replace(/\bD([2-9TJQKA]+\b)/gi, function(x, y) { return '<ds></ds>' + y; })
-    .replace(/\bC([2-9TJQKA]+\b)/gi, function(x, y) { return '<cs></cs>' + y; });
+    .replace(/(\bS\b|♠)/g, '<ss></ss>')
+    .replace(/(\bH\b|♥)/g, '<hs></hs>')
+    .replace(/(\bD\b|♦)/g, '<ds></ds>')
+    .replace(/(\bC\b|♣)/g, '<cs></cs>')
+    .replace(/([1-7])S\b/g, function(x, y) { return y + '<ss></ss>'; })
+    .replace(/([1-7])H\b/g, function(x, y) { return y + '<hs></hs>'; })
+    .replace(/([1-7])D\b/g, function(x, y) { return y + '<ds></ds>'; })
+    .replace(/([1-7])C\b/g, function(x, y) { return y + '<cs></cs>'; })
+    .replace(/\bS([2-9TJQKA]+\b)/g, function(x, y) { return '<ss></ss>' + y; })
+    .replace(/\bH([2-9TJQKA]+\b)/g, function(x, y) { return '<hs></hs>' + y; })
+    .replace(/\bD([2-9TJQKA]+\b)/g, function(x, y) { return '<ds></ds>' + y; })
+    .replace(/\bC([2-9TJQKA]+\b)/g, function(x, y) { return '<cs></cs>' + y; });
 }
 
 function replace_markdown(text) {
