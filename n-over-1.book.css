@@ -1,16 +1,46 @@
 /* Page setup */
 @page:first {
   counter-increment: page_num 0;
-  @bottom-center {
+  @top-left {
+    content: normal;
+  }
+  @top-right {
+    content: normal;
+  }
+  @bottom-left {
+    content: normal;
+  }
+  @bottom-right {
     content: normal;
   }
 }
 @page {
   size: letter;
+}
+@page:left {
   counter-increment: page_num;
-  @bottom-center {
-    content: counter(page_num);
+  @top-left {
+    content: '无将应叫逼局体系';
+    font-size: smaller;
   }
+  @bottom-left {
+    content: counter(page_num);
+    font-size: smaller;
+  }
+}
+@page:right {
+  counter-increment: page_num;
+  @top-right {
+    content: string(chapter);
+    font-size: smaller;
+  }
+  @bottom-right {
+    content: counter(page_num);
+    font-size: smaller;
+  }
+}
+h1, h2 {
+  string-set: chapter content();
 }
 
 #heading_0 {
