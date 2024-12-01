@@ -90,3 +90,7 @@ table.auction td.bid-cmt {
   width: 2.2in;
 }
 
+/* Cross references */
+a.xref:after {
+  content: '（第' target-counter(attr(href), page_num) '页）';
+}
