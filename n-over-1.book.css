@@ -90,9 +90,25 @@ table.auction td.bid-cmt {
   width: 2.2in;
 }
 
-/* Links */
-a:after {
-  content: '（' attr(href) '）';
+/* Links as footnotes */
+@page {
+  @footnote {
+    border-top: 1pt solid black;
+  }
+}
+.footnote {
+  display: block;
+  float: footnote;
+  font-size: 80%;
+}
+::footnote-call {
+  content: '[' counter(footnote) ']';
+  font-size: 80%;
+  position: relative;
+  vertical-align: super;
+}
+::footnote-marker {
+  content: '[' counter(footnote) '] ';
 }
 
 /* Cross references */
