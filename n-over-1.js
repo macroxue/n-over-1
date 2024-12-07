@@ -20,7 +20,7 @@ function render_text() {
       html = walker.currentNode.innerHTML;
       html = replace_suit_symbols(html);
       html = replace_markdown(html);
-      html = html.replace(/, /, '，');
+      html = html.replace(/, /g, '，');
       walker.currentNode.innerHTML = html;
 
       if (['H2', 'H3', 'H4'].includes(walker.currentNode.tagName)) {
