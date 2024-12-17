@@ -8,6 +8,7 @@ function initialize() {
 
   render_md_auctions();
   render_md_tables();
+  render_inline_hands();
   render_text();
 }
 
@@ -32,6 +33,13 @@ function render_text() {
   }
 
   document.getElementById('toc').innerHTML = headings.join('\n');
+}
+
+function render_inline_hands() {
+  hands = document.getElementsByClassName('inline-hand');
+  for (hand of hands) {
+    hand.innerHTML = hand_to_html_line(remove_suit_symbol(hand.innerHTML));
+  }
 }
 
 function replace_suit_symbols(text) {
