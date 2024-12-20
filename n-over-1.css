@@ -61,7 +61,7 @@ div#cover {
   text-decoration: none;
 }
 .toc_h5:before {
-  content: '                ' counter(toc_h2) '.' counter(toc_h3) '.' counter(toc_h4) '.' counter(toc_h5) ' ';
+  content: '                   ' counter(toc_h2) '.' counter(toc_h3) '.' counter(toc_h4) '.' counter(toc_h5) ' ';
   white-space: pre;
 }
 .toc_h5 {

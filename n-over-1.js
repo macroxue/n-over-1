@@ -24,7 +24,7 @@ function render_text() {
       html = html.replace(/, /g, '，');
       walker.currentNode.innerHTML = html;
 
-      if (['H2', 'H3', 'H4'].includes(walker.currentNode.tagName)) {
+      if (['H2', 'H3', 'H4', 'H5'].includes(walker.currentNode.tagName)) {
         walker.currentNode.id = 'heading_' + headings.length;
         headings.push('<a class="toc_' + walker.currentNode.tagName.toLowerCase() + '" href="#' +
                       walker.currentNode.id + '">' + html + '</a><br>');
