@@ -9,6 +9,7 @@ function initialize() {
   render_md_auctions();
   render_md_tables();
   render_inline_hands();
+  render_external_links();
   render_text();
 }
 
@@ -33,6 +34,17 @@ function render_text() {
   }
 
   document.getElementById('toc').innerHTML = headings.join('\n');
+}
+
+function render_external_links() {
+  links = document.getElementsByClassName('external');
+  for (link of links) {
+    href = link.getAttribute('href');
+    new_node = document.createElement("span");
+    new_node.setAttribute('class', 'footnote');
+    new_node.innerHTML = href;
+    link.after(new_node);
+  }
 }
 
 function render_inline_hands() {
