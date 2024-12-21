@@ -108,6 +108,14 @@ h5 {
   font-size: 100%;
   counter-increment: h5;
 }
+h6:before, h6:after {
+  content: ' —— ';
+}
+h6 {
+  font-size: 100%;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
 
 /* Paragraphs */
 p {
