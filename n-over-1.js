@@ -17,7 +17,7 @@ function render_text() {
   walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
   headings = [];
   while (walker.nextNode()) {
-    if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'TH', 'TD'].includes(walker.currentNode.tagName)) {
+    if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TH', 'TD'].includes(walker.currentNode.tagName)) {
       //console.log(walker.currentNode);
       html = walker.currentNode.innerHTML;
       html = replace_suit_symbols(html);
