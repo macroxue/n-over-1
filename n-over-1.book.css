@@ -15,6 +15,7 @@
   }
 }
 @page {
+  font-family: DejaVu, NotoSansSC;
   size: letter;
 }
 @page:left {
