@@ -262,6 +262,12 @@ function count_points(hand) {
   return hcp;
 }
 
+function space_cards(suit) {
+  return suit.replace(/./g, function (x) { return '&thinsp;' + x; })
+    .replace(/\bJ\b/g, '&hairsp;&hairsp;J&hairsp;')
+    .replace(/\b(T|10)\b/g, '<font style="letter-spacing:-2px">1</font>0');
+}
+
 function hand_to_html(hand) {
   check_hand(hand);
   hcp = count_points(hand);
@@ -269,9 +275,7 @@ function hand_to_html(hand) {
   suits = hand.replace(/10/g, 'T').split(' ');
   for (s in suits) {
     len = suits[s].length;
-    suits[s] = suits[s]
-      .replace(/./g, function (x) { return '&thinsp;' + x; })
-      .replace(/\bT\b/g, '10');
+    suits[s] = space_cards(suits[s]);
     if (len >= 8) {
       space = len <= 9 ? -1 : -2;
       suits[s] = '<font style="letter-spacing:' + space + 'px">' + suits[s] + '</font>';
@@ -300,9 +304,7 @@ function hand_to_html_line(hand) {
   suits = hand.replace(/10/g, 'T').split(' ');
   for (s in suits) {
     len = suits[s].length;
-    suits[s] = suits[s]
-      .replace(/./g, function (x) { return '&thinsp;' + x; })
-      .replace(/\bT\b/g, '10');
+    suits[s] = space_cards(suits[s]);
   }
   html = `
        <abbr title='${hcp} points'>
