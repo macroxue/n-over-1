@@ -283,7 +283,7 @@ function hand_to_html(hand) {
   }
   html = `
      <td class='hand'>
-       <abbr title='${hcp} points'>
+       <abbr title='${hcp}大牌点'>
          <ss>S</ss> <br/>
          <hs>H</hs> <br/>
          <ds>D</ds> <br/>
@@ -307,7 +307,7 @@ function hand_to_html_line(hand) {
     suits[s] = space_cards(suits[s]);
   }
   html = `
-       <abbr title='${hcp} points'>
+       <abbr title='${hcp}大牌点'>
          <ss>S</ss> <hs>H</hs> <ds>D</ds> <cs>C</cs>
        </abbr>`;
   return html
