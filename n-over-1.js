@@ -125,12 +125,13 @@ function render_pair_auction(rows) {
       '</tr> </table>';
   } else {
     // Vertical layout.
-    return '<table class="auction">' +
-      '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>' +
-      '<tr>' +
-      '<td class="bid-cmt">' + bids[0] + '</td>' +
-      '<td class="bid-cmt">' + bids[1] + '</td>' +
-      '</tr> </table>';
+    html = '<table class="auction">' +
+        '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>';
+    if (bids[0] != '') {
+      html += '<tr>' + '<td class="bid-cmt">' + bids[0] + '</td>' +
+        '<td class="bid-cmt">' + bids[1] + '</td>' + '</tr>';
+    }
+    return html + '</table>';
   }
 }
 
