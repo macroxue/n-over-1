@@ -226,6 +226,12 @@ table.dense-matrix td.no-bot-top {
 }
 
 /* Auction tables */
+table.auction {
+  background-color: #eee;
+  border-radius: 1.0em;
+  border-spacing: 0.5em;
+}
+
 table.auction td.hand {
   vertical-align: middle;
   width: 1.4in;
