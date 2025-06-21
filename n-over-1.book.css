@@ -68,10 +68,11 @@ body {
 h1, h2 {
   page-break-before: always;
 }
-h2, h3, h4, h5 {
+h2, h3, h4, h5, h6, th, tr:first-child {
+  page-break-inside: avoid;
   page-break-after: avoid;
 }
-.auction {
+.auction, .numeric {
   page-break-inside: avoid;
 }
 
