@@ -21,7 +21,7 @@
 @page:left {
   counter-increment: page_num;
   @top-left {
-    content: '无将应叫逼局体系';
+    content: '§ 无将应叫逼局体系 §';
     font-size: smaller;
   }
   @bottom-left {
@@ -32,7 +32,7 @@
 @page:right {
   counter-increment: page_num;
   @top-right {
-    content: string(chapter);
+    content: '§ ' string(chapter) ' §';
     font-size: smaller;
   }
   @bottom-right {
