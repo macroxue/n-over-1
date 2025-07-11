@@ -27,9 +27,6 @@ div#cover {
 }
 
 /* Table of contents */
-#toc {
-  columns: 2;
-}
 .toc_h2, .toc_h3, .toc_h4, .toc_h5 {
   line-height: 160%;
 }

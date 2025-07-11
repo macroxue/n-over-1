@@ -11,7 +11,13 @@ function initialize() {
   render_inline_hands();
   render_external_links();
   render_text();
+  window.onresize();
 }
+
+window.onresize = function() {
+  let small_screen = window.matchMedia("(max-width: 768px)").matches;
+  document.getElementById('toc').style.columns = small_screen ? '1' : '2';
+};
 
 function render_text() {
   walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
