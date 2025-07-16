@@ -1,16 +1,19 @@
 var use_horizontal_layout = false;
 
+var parser = new DOMParser();
+
 function initialize() {
   url_params = new URLSearchParams(window.location.search);
-  if (url_params.get('h') != null) {
+  if (url_params.has('h')) {
     use_horizontal_layout = true;
   }
 
-  render_md_auctions();
-  render_md_tables();
+  // Simple rendering first so the DOM doesn't get bloated for later rendering.
+  render_text();
   render_inline_hands();
   render_external_links();
-  render_text();
+  render_md_tables();
+  render_md_auctions();
   window.onresize();
 }
 
@@ -23,15 +26,11 @@ function render_text() {
   walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
   headings = [];
   while (walker.nextNode()) {
-    if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TH', 'TD'].includes(walker.currentNode.tagName)) {
-      //console.log(walker.currentNode);
-      html = walker.currentNode.innerHTML;
-      html = replace_suit_symbols(html);
-      html = replace_markdown(html);
-      html = html.replace(/, /g, '，');
+    if (walker.currentNode.tagName.match(/^(H[1-6]|P)$/)) {
+      html = transform(walker.currentNode.innerHTML);
       walker.currentNode.innerHTML = html;
 
-      if (['H2', 'H3', 'H4', 'H5'].includes(walker.currentNode.tagName)) {
+      if (walker.currentNode.tagName.match(/^H[2-5]$/)) {
         walker.currentNode.id = 'heading_' + headings.length;
         headings.push('<a class="toc_' + walker.currentNode.tagName.toLowerCase() + '" href="#' +
                       walker.currentNode.id + '">' + html + '</a><br>');
@@ -60,25 +59,17 @@ function render_inline_hands() {
   }
 }
 
-function replace_suit_symbols(text) {
-  return text.replace(/\bnt\b/gi, 'NT')
+function transform(text) {
+  return text
     .replace(/(\bS\b|♠)/g, '<ss></ss>')
     .replace(/(\bH\b|♥)/g, '<hs></hs>')
     .replace(/(\bD\b|♦)/g, '<ds></ds>')
     .replace(/(\bC\b|♣)/g, '<cs></cs>')
-    .replace(/([1-7])S\b/g, function(x, y) { return y + '<ss></ss>'; })
-    .replace(/([1-7])H\b/g, function(x, y) { return y + '<hs></hs>'; })
-    .replace(/([1-7])D\b/g, function(x, y) { return y + '<ds></ds>'; })
-    .replace(/([1-7])C\b/g, function(x, y) { return y + '<cs></cs>'; })
-    .replace(/\bS([2-9TJQKA]+\b)/g, function(x, y) { return '<ss></ss>' + y; })
-    .replace(/\bH([2-9TJQKA]+\b)/g, function(x, y) { return '<hs></hs>' + y; })
-    .replace(/\bD([2-9TJQKA]+\b)/g, function(x, y) { return '<ds></ds>' + y; })
-    .replace(/\bC([2-9TJQKA]+\b)/g, function(x, y) { return '<cs></cs>' + y; });
-}
-
-function replace_markdown(text) {
-  return text.replace(/__(.*?)__/g, function(x, y) { return '<u>' + y + '</u>'; })
-    .replace(/\*\*(.*?)\*\*/g, function(x, y) { return '<b>' + y + '</b>'; });
+    .replace(/([1-7])([SHDC])\b/g, '$1<$2s></$2s>')
+    .replace(/\b([SHDC])([2-9TJQKA]+\b)/g, '<$1s></$1s>$2')
+    .replace(/__(.*?)__/g, '<u>$1</u>')
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/, /g, '，');
 }
 
 function render_md_auctions() {
@@ -91,11 +82,10 @@ function render_md_auctions() {
 }
 
 function render_md_auction(md_auction) {
-  parser = new DOMParser();
   xml_doc = parser.parseFromString(md_auction.innerHTML, "text/xml");
   root = xml_doc.getElementsByTagName('xml')[0];
   style = root.getAttribute('style');
-  rows = root.childNodes[0].nodeValue.split('\n').slice(1, -1);
+  rows = transform(root.childNodes[0].nodeValue).split('\n').slice(1, -1);
   if (rows[0].split('|').length == 2)
     return render_pair_auction(rows);
   else
@@ -184,7 +174,7 @@ function render_full_auction(rows) {
 }
 
 function remove_suit_symbol(suit) {
-  return suit.replace(/[shdc♠♥♦♣] /gi, '').trim();
+  return suit.replace(/<[shdc\/<>]*> /g, '').trim();
 }
 
 function render_md_tables() {
@@ -197,12 +187,11 @@ function render_md_tables() {
 }
 
 function render_md_table(md_table) {
-  parser = new DOMParser();
   xml_doc = parser.parseFromString(md_table.innerHTML, "text/xml");
   root = xml_doc.getElementsByTagName('xml')[0];
   style = root.getAttribute('style');
   font_size = root.getAttribute('font-size');
-  rows = root.childNodes[0].nodeValue.split('\n');
+  rows = transform(root.childNodes[0].nodeValue).split('\n');
   if (font_size == null) {
     html = '<table class="' + style + '">';
   } else {
@@ -241,7 +230,7 @@ function render_cell(cell, is_header) {
       attr += ' class="' + border + '"';
   }
   cell = cell.replace(regex, '');
-  if (cell.match(/[♠S] .* [♥H] .* [♦D] .* [♣C] .*/)) {
+  if (cell.match(/<ss>.* <hs>.* <ds>.* <cs>.* /)) {
     cell = remove_suit_symbol(cell);
     cell = hand_to_html_line(cell);
   }
@@ -262,9 +251,9 @@ function check_hand(hand) {
 
 function count_points(hand) {
   hcp = 0;
-  for (i = 0; i < hand.length; ++i) {
-    hcp += (hand[i] == 'A') * 4 + (hand[i] == 'K') * 3 +
-           (hand[i] == 'Q') * 2 + (hand[i] == 'J') * 1;
+  for (card of hand) {
+    hcp += (card == 'A') * 4 + (card == 'K') * 3 +
+           (card == 'Q') * 2 + (card == 'J') * 1;
   }
   return hcp;
 }
