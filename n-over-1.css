@@ -240,6 +240,11 @@ table.auction td.bid-cmt2 {
   width: 1.2in;
 }
 
+span.bid {
+  display: inline-block;
+  width: 0.5in;
+}
+
 /* Links as footnotes */
 .footnote {
   display: none;

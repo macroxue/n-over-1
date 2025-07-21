@@ -93,10 +93,7 @@ function render_md_auction(md_auction) {
 }
 
 function align_bid_cmt(bid_cmt) {
-  space = bid_cmt.includes('NT') ? ' &thinsp; ' :
-    bid_cmt.includes('不叫') ? ' &nbsp; ' :
-    bid_cmt.includes('P') ? ' &emsp;&ensp; ' : ' &ensp;&nbsp; ';
-  return bid_cmt.replace(/ - /, space);
+  return bid_cmt.replace(/^/, '<span class="bid">').replace(/ - |$/, '</span>');
 }
 
 function render_pair_auction(rows) {
