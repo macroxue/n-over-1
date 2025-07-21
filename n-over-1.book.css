@@ -90,6 +90,9 @@ table.auction td.hand {
 table.auction td.bid-cmt {
   width: 2.2in;
 }
+table.auction td.bid-cmt2 {
+  width: 0.5in;
+}
 
 /* Links as footnotes */
 @page {

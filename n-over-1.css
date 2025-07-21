@@ -236,6 +236,9 @@ table.auction td.hand {
 table.auction td.bid-cmt {
   width: 2.4in;
 }
+table.auction td.bid-cmt2 {
+  width: 1.2in;
+}
 
 /* Links as footnotes */
 .footnote {

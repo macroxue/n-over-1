@@ -94,7 +94,8 @@ function render_md_auction(md_auction) {
 
 function align_bid_cmt(bid_cmt) {
   space = bid_cmt.includes('NT') ? ' &thinsp; ' :
-    bid_cmt.includes('不叫') ? ' &nbsp; ' : ' &ensp;&nbsp; ';
+    bid_cmt.includes('不叫') ? ' &nbsp; ' :
+    bid_cmt.includes('P') ? ' &emsp;&ensp; ' : ' &ensp;&nbsp; ';
   return bid_cmt.replace(/ - /, space);
 }
 
@@ -105,27 +106,38 @@ function render_pair_auction(rows) {
     hands[0] += remove_suit_symbol(suits[0]) + ' ';
     hands[1] += remove_suit_symbol(suits[1]) + ' ';
   }
-  bids = ['', ''];
+  bids = ['', '', '', ''];
   for (row of rows.slice(4)) {
     items = row.trim().split('|').map(b => align_bid_cmt(b));
     bids[0] = bids[0] == '' ? items[0] : bids[0] + '<br/>' + items[0];
     if (items.length > 1)
       bids[1] = bids[1] == '' ? items[1] : bids[1] + '<br/>' + items[1];
+    if (items.length > 2)
+      bids[2] = bids[2] == '' ? items[2] : bids[2] + '<br/>' + items[2];
+    if (items.length > 3)
+      bids[3] = bids[3] == '' ? items[3] : bids[3] + '<br/>' + items[3];
   }
+  bid1_class = (bids[2] == '' ? 'bid-cmt' : 'bid-cmt2');
   if (use_horizontal_layout) {
     // Horizontal layout.
     return '<table class="auction">' +
       '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) +
       '<td class="bid-cmt">' + bids[0] + '</td>' +
-      '<td class="bid-cmt">' + bids[1] + '</td>' +
+      '<td class="' + bid1_class + '">' + bids[1] + '</td>' +
+      (bids[2] == '' ? '' : '<td class="bid-cmt">' + bids[2] + '</td>') +
+      (bids[3] == '' ? '' : '<td class="bid-cmt2">' + bids[3] + '</td>') +
       '</tr> </table>';
   } else {
     // Vertical layout.
-    html = '<table class="auction">' +
-        '<tr>' + hand_to_html(hands[0]) + hand_to_html(hands[1]) + '</tr>';
+    colspan = (bids[2] == '' ? 1 : 2);
+    html = '<table class="auction"> <tr>' + hand_to_html(hands[0], colspan) +
+      hand_to_html(hands[1], colspan) + '</tr>';
     if (bids[0] != '') {
       html += '<tr>' + '<td class="bid-cmt">' + bids[0] + '</td>' +
-        '<td class="bid-cmt">' + bids[1] + '</td>' + '</tr>';
+        '<td class="' + bid1_class + '">' + bids[1] + '</td>' +
+        (bids[2] == '' ? '' : '<td class="bid-cmt">' + bids[2] + '</td>') +
+        (bids[3] == '' ? '' : '<td class="bid-cmt2">' + bids[3] + '</td>') +
+        '</tr>';
     }
     return html + '</table>';
   }
@@ -264,7 +276,7 @@ function space_cards(suit) {
     .replace(/\b(T|10)\b/g, '<font style="letter-spacing:-2px">1</font>0');
 }
 
-function hand_to_html(hand) {
+function hand_to_html(hand, colspan=1) {
   check_hand(hand);
   hcp = count_points(hand);
 
@@ -278,7 +290,7 @@ function hand_to_html(hand) {
     }
   }
   html = `
-     <td class='hand'>
+     <td class='hand' colspan='${colspan}'>
        <abbr title='${hcp}大牌点'>
          <ss>S</ss> <br/>
          <hs>H</hs> <br/>
