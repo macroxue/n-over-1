@@ -68,11 +68,14 @@ div#cover {
 
 /* Headings */
 h1, h2 {
-  border-bottom: 1px solid;
+  background-image: url('mountains.jpg');
+  background-size: cover;
   font-size: 200%;
-  font-weight: lighter;
-  margin-bottom: 1.0in;
-  margin-top: 1.0in;
+  font-weight: normal;
+  margin-bottom: 0.7in;
+  margin-top: 0.7in;
+  padding-bottom: 0.3in;
+  padding-top: 0.3in;
   text-align: center;
 }
 h2:before {
