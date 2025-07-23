@@ -242,6 +242,10 @@ table.auction td.bid-cmt {
 table.auction td.bid-cmt2 {
   width: 1.2in;
 }
+table.auction td.orientation {
+  text-align: center;
+  vertical-align: middle;
+}
 
 span.bid {
   display: inline-block;

@@ -128,9 +128,10 @@ function render_pair_auction(rows) {
     // Vertical layout.
     colspan = (bids[2] == '' ? 1 : 2);
     html = '<table class="auction"> <tr>' + hand_to_html(hands[0], colspan) +
+      '<td class="orientation">┌─┐<br>西&emsp;东<br>└─┘</td>' +
       hand_to_html(hands[1], colspan) + '</tr>';
     if (bids[0] != '') {
-      html += '<tr>' + '<td class="bid-cmt">' + bids[0] + '</td>' +
+      html += '<tr>' + '<td class="bid-cmt" colspan="2">' + bids[0] + '</td>' +
         '<td class="' + bid1_class + '">' + bids[1] + '</td>' +
         (bids[2] == '' ? '' : '<td class="bid-cmt">' + bids[2] + '</td>') +
         (bids[3] == '' ? '' : '<td class="bid-cmt2">' + bids[3] + '</td>') +
@@ -169,8 +170,10 @@ function render_full_auction(rows) {
       bids[3] = bids[3] == '' ? items[3] : bids[3] + '<br/>' + items[3];
   }
   layout = '<table class="auction">' +
-    '<tr> <td>' + info + '</td>' + hand_to_html(hands[1]) + '</tr>' +
-    '<tr> ' + hand_to_html(hands[0]) + '<td></td>' + hand_to_html(hands[2]) + '</tr>' +
+   '<tr> <td>' + info + '</td>' + hand_to_html(hands[1]) + '</tr>' +
+    '<tr> ' + hand_to_html(hands[0]) +
+    '<td class="orientation">┌ 北 ┐<br>西&emsp;&emsp;东<br>└ 南 ┘</td>' +
+    hand_to_html(hands[2]) + '</tr>' +
     '<tr> <td></td>' + hand_to_html(hands[3]) + '</tr>' +
     '</table>';
   auction = '<table>' +
