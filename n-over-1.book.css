@@ -83,17 +83,6 @@ table {
   width: 75%;
 }
 
-/* Auctions */
-table.auction td.hand {
-  width: 1.2in;
-}
-table.auction td.bid-cmt {
-  width: 2.2in;
-}
-table.auction td.bid-cmt2 {
-  width: 0.5in;
-}
-
 /* Links as footnotes */
 @page {
   @footnote {

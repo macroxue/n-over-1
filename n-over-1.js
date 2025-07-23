@@ -18,8 +18,14 @@ function initialize() {
 }
 
 window.onresize = function() {
-  let small_screen = window.matchMedia("(max-width: 768px)").matches;
-  document.getElementById('toc').style.columns = small_screen ? '1' : '2';
+  small_screen = window.matchMedia("(max-width: 768px)").matches;
+  // outerWidth,outerHeight must match --window-size in the makefile.
+  book = (window.outerWidth == 1234 && window.outerHeight == 567);
+  document.getElementById('toc').style.columns = small_screen || book ? '1' : '2';
+  columns = document.getElementsByClassName('column');
+  for (column of columns) {
+    column.style.columns = small_screen && !book ? '1' : '2';
+  }
 };
 
 function render_text() {
