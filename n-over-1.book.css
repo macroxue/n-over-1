@@ -21,7 +21,7 @@
 @page:left {
   counter-increment: page_num;
   @top-left {
-    content: '§ 无将应叫逼局体系 §';
+    content: string(chapter) ' ➤ ' string(section) ' ➤ ' string(subsection);
     font-size: smaller;
   }
   @bottom-left {
@@ -32,7 +32,7 @@
 @page:right {
   counter-increment: page_num;
   @top-right {
-    content: '§ ' string(chapter) ' §';
+    content: string(chapter) ' ➤ ' string(section) ' ➤ ' string(subsection);
     font-size: smaller;
   }
   @bottom-right {
@@ -41,7 +41,13 @@
   }
 }
 h1, h2 {
-  string-set: chapter content();
+  string-set: chapter content(), section '', subsection '';
+}
+h3 {
+  string-set: section content(), subsection '';
+}
+h4 {
+  string-set: subsection content();
 }
 
 #heading_0 {
