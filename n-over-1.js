@@ -38,7 +38,7 @@ function render_text() {
                     '" href="#' + walker.currentNode.id + '">' +
                     walker.currentNode.innerHTML + '</a><br>');
     }
-    if (walker.currentNode.tagName.match(/^P$/)) {
+    if (walker.currentNode.tagName.match(/^H6|P$/)) {
       html = transform(walker.currentNode.innerHTML);
       walker.currentNode.innerHTML = html;
     }
