@@ -32,13 +32,13 @@ function render_text() {
   walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
   headings = [];
   while (walker.nextNode()) {
-    if (walker.currentNode.tagName.match(/^H[2-5]$/)) {
+    if (walker.currentNode.tagName.match(/^H[2-4]$/)) {
       walker.currentNode.id = 'heading_' + headings.length;
       headings.push('<a class="toc_' + walker.currentNode.tagName.toLowerCase() +
                     '" href="#' + walker.currentNode.id + '">' +
                     walker.currentNode.innerHTML + '</a><br>');
     }
-    if (walker.currentNode.tagName.match(/^H6|P$/)) {
+    if (walker.currentNode.tagName.match(/^H[5-6]|P$/)) {
       html = transform(walker.currentNode.innerHTML);
       walker.currentNode.innerHTML = html;
     }
