@@ -57,11 +57,6 @@ h4 {
   counter-reset: page_num;
 }
 
-/* Reduce font size for a better fit */
-body {
-  font-size: 90%;
-}
-
 /* Table of contents */
 #toc {
   columns: 1;
@@ -77,16 +72,8 @@ h1, h2 {
 h2, h3, h4, h5, h6 {
   page-break-after: avoid;
 }
-table {
+div.column table, tr {
   page-break-inside: avoid;
-}
-
-/* Figures */
-#contract-points {
-  display: block;
-}
-#contract-points img {
-  width: 75%;
 }
 
 /* Links as footnotes */
@@ -98,7 +85,7 @@ table {
 .footnote {
   display: block;
   float: footnote;
-  font-size: 80%;
+  font-size: 70%;
 }
 ::footnote-call {
   content: '[' counter(footnote) ']';
@@ -113,4 +100,9 @@ table {
 /* Cross references */
 a.xref:after {
   content: '（第' target-counter(attr(href), page_num) '页）';
+}
+
+/* Tables */
+table.dense-matrix th, table.dense-matrix td {
+  font-size: 90%;
 }

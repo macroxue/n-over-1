@@ -311,14 +311,19 @@ function hand_to_html(hand, colspan=1) {
     .replace(/\bC\b/, suits[3]);
 }
 
+function small_space_cards(suit) {
+  return suit.replace(/./g, function (x) { return '&hairsp;' + x; })
+    .replace(/\bJ\b/g, '&hairsp;J&hairsp;')
+    .replace(/\b(T|10)\b/g, '<font style="letter-spacing:-2px">1</font>0');
+}
+
 function hand_to_html_line(hand) {
   check_hand(hand);
   hcp = count_points(hand);
 
   suits = hand.replace(/10/g, 'T').split(' ');
   for (s in suits) {
-    len = suits[s].length;
-    suits[s] = space_cards(suits[s]);
+    suits[s] = small_space_cards(suits[s]);
   }
   html = `
        <abbr title='${hcp}大牌点'>

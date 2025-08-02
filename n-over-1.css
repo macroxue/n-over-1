@@ -161,8 +161,10 @@ cs:before {
 }
 
 /* Figures */
-#contract-points {
+img.points {
   display: flex;
+  margin: auto;
+  width: 80%;
 }
 
 /* Styling tooltips, e.g. point count */
@@ -217,7 +219,7 @@ table.dense-matrix, table.dense-matrix th, table.dense-matrix td {
   text-align: center;
 }
 table.dense-matrix th, table.dense-matrix td {
-  font-size: 96%;
+  font-size: 95%;
   padding-left: 1px;
   padding-right: 1px;
 }
