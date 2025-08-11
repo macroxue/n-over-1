@@ -12,7 +12,7 @@
 
 #### 创建 PDF 文档
 
-在 Linux 终端里运行如下指令可以生成 n-over-1.pdf 以方便离线阅读。
+在 Linux 终端里运行如下指令可以生成 [n-over-1.pdf](https://github.com/macroxue/n-over-1/blob/master/n-over-1.pdf) 以方便离线阅读。
 
 ```bash
 sudo apt install git chromium weasyprint evince
