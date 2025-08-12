@@ -179,6 +179,7 @@ table {
   margin-right: auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  table-layout: auto;
   white-space: nowrap;
 }
 th, td {
@@ -250,13 +251,13 @@ table.auction {
 
 table.auction td.hand {
   vertical-align: middle;
-  width: 0.5in;
+  min-width: 0.5in;
 }
 table.auction td.bid-cmt {
-  width: 2.5in;
+  min-width: 2.2in;
 }
 table.auction td.bid-cmt2 {
-  width: 0.5in;
+  min-width: 0.5in;
 }
 table.auction td.orientation {
   text-align: center;
@@ -265,7 +266,7 @@ table.auction td.orientation {
 
 span.bid {
   display: inline-block;
-  width: 0.5in;
+  min-width: 0.5in;
 }
 
 /* Links as footnotes */
