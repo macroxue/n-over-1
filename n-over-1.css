@@ -26,6 +26,20 @@ div#cover {
   display: inline;
 }
 
+/* Navigation */
+#nav-div {
+  background-color: #ffe;
+  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow: auto;
+  padding: 10px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
+
 /* Table of contents */
 .toc_h2, .toc_h3, .toc_h4, .toc_h5 {
   line-height: 160%;

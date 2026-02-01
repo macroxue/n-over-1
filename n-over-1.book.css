@@ -57,6 +57,11 @@ h4 {
   counter-reset: page_num;
 }
 
+/* Navigation */
+#nav-div {
+  display: none;
+}
+
 /* Table of contents */
 #toc {
   columns: 1;

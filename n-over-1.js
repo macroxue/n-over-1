@@ -1,5 +1,5 @@
 var use_horizontal_layout = false;
-
+var nav_scroll_top = 0;
 var parser = new DOMParser();
 
 function initialize() {
@@ -15,6 +15,23 @@ function initialize() {
   render_md_tables();
   render_md_auctions();
   window.onresize();
+
+  // Close TOC navigation after a click.
+  const nav = document.getElementById('nav');
+  const nav_div = document.getElementById('nav-div');
+	document.addEventListener('click', function(event) {
+    if (nav.open) {
+      // Save the scroll position.
+      nav_scroll_top = nav_div.scrollTop;
+      // Close the navigation, except when it's closed by a click on the summary.
+      if (!(event.target.nodeName == 'SUMMARY' && event.target.parentNode == nav))
+        nav.removeAttribute('open');
+    }
+  });
+  nav.addEventListener('toggle', (event) => {
+    // Restore the previous scroll position.
+    if (nav.open) nav_div.scrollTop = nav_scroll_top;
+  });
 }
 
 window.onresize = function() {
@@ -45,6 +62,7 @@ function render_text() {
   }
 
   document.getElementById('toc').innerHTML = headings.join('\n');
+  document.getElementById('nav').innerHTML += headings.join('\n');
 }
 
 function render_external_links() {
