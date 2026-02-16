@@ -93,6 +93,7 @@ function transform(text) {
     .replace(/\b([SHDC])([2-9TJQKA]+\b)/g, '<$1s></$1s>$2')
     .replace(/__(.*?)__/g, '<u>$1</u>')
     .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/\(([0-9]+)\)/g, function(m, n) { return '&#' + (9311 + Number(n)); })
     .replace(/, /g, '，');
 }
 
@@ -183,8 +184,13 @@ function render_full_auction(rows) {
     hands[3] += remove_suit_symbol(suits[1]) + ' ';
   }
   bids = ['', '', '', ''];
+  notes = '';
   for (row of rows.slice(12)) {
     items = row.split('|');
+    if (items.length == 1 && items[0].trim().length > 4) {
+      notes += row + '<br/>';
+      continue;
+    }
     bids[0] = bids[0] == '' ? items[0] : bids[0] + '<br/>' + items[0];
     if (items.length > 1)
       bids[1] = bids[1] == '' ? items[1] : bids[1] + '<br/>' + items[1];
@@ -206,7 +212,7 @@ function render_full_auction(rows) {
     '<td class="bid-cmt">' + bids[2] + '</td>' +
     '<td class="bid-cmt">' + bids[3] + '</td>' +
     '</table>';
-  return '<table> <td>' + layout + '</td> <td>' + auction + '</td>';
+  return '<table> <td>' + layout + '</td> <td>' + auction + notes + '</td> </table>';
 }
 
 function remove_suit_symbol(suit) {
