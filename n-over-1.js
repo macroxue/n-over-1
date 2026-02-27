@@ -199,13 +199,24 @@ function render_full_auction(rows) {
     if (items.length > 3)
       bids[3] = bids[3] == '' ? items[3] : bids[3] + '<br/>' + items[3];
   }
+  const ns_vulnerable = /双方有局|双有|南北/.test(info);
+  const ew_vulnerable = /双方有局|双有|东西/.test(info);
+  const north = ns_vulnerable ? '<red>北</red>' : '北';
+  const south = ns_vulnerable ? '<red>南</red>' : '南';
+  const east = ew_vulnerable ? '<red>东</red>' : '东';
+  const west = ew_vulnerable ? '<red>西</red>' : '西';
   layout = '<table class="auction">' +
    '<tr> <td>' + info + '</td>' + hand_to_html(hands[1]) + '</tr>' +
     '<tr> ' + hand_to_html(hands[0]) +
-    '<td class="orientation">┌ 北 ┐<br>西&emsp;&emsp;东<br>└ 南 ┘</td>' +
+    '<td class="orientation">┌ ' + north + ' ┐<br>' +
+    west + '&emsp;&emsp;' + east + '<br>└ ' + south + ' ┘</td>' +
     hand_to_html(hands[2]) + '</tr>' +
     '<tr> <td></td>' + hand_to_html(hands[3]) + '</tr>' +
     '</table>';
+  for (i = 0; i < bids.length; ++i) {
+    bids[i] = bids[i].replace(/北/g, north).replace(/南/g, south)
+                     .replace(/东/g, east).replace(/西/g, west);
+  }
   auction = '<table>' +
     '<td class="bid-cmt">' + bids[0] + '</td>' +
     '<td class="bid-cmt">' + bids[1] + '</td>' +

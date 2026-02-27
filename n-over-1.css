@@ -156,6 +156,9 @@ ul {
   margin: 0.5em;
 }
 
+/* Seat colors */
+red { color: #dd0000 }
+
 /* Suit symbols */
 ss:before {
   color: black;
