@@ -270,6 +270,9 @@ table.auction td.hand {
   vertical-align: middle;
   min-width: 0.5in;
 }
+table.auction td.bid {
+  text-align: center;
+}
 table.auction td.bid-cmt {
   min-width: 2.2in;
 }

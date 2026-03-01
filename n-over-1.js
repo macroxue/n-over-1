@@ -186,7 +186,7 @@ function render_full_auction(rows) {
   bids = ['', '', '', ''];
   notes = '';
   for (row of rows.slice(12)) {
-    items = row.split('|');
+    items = row.split('|').map(item => item.trim());
     if (items.length == 1 && items[0].trim().length > 4) {
       notes += row + '<br/>';
       continue;
@@ -217,11 +217,11 @@ function render_full_auction(rows) {
     bids[i] = bids[i].replace(/北/g, north).replace(/南/g, south)
                      .replace(/东/g, east).replace(/西/g, west);
   }
-  auction = '<table>' +
-    '<td class="bid-cmt">' + bids[0] + '</td>' +
-    '<td class="bid-cmt">' + bids[1] + '</td>' +
-    '<td class="bid-cmt">' + bids[2] + '</td>' +
-    '<td class="bid-cmt">' + bids[3] + '</td>' +
+  auction = '<table class="auction">' +
+    '<td class="bid">' + bids[0] + '</td>' +
+    '<td class="bid">' + bids[1] + '</td>' +
+    '<td class="bid">' + bids[2] + '</td>' +
+    '<td class="bid">' + bids[3] + '</td>' +
     '</table>';
   return '<table> <td>' + layout + '</td> <td>' + auction + notes + '</td> </table>';
 }
