@@ -90,10 +90,11 @@ function transform(text) {
     .replace(/(\bD\b|♦)/g, '<ds></ds>')
     .replace(/(\bC\b|♣)/g, '<cs></cs>')
     .replace(/([1-7])([SHDC])\b/g, '$1<$2s></$2s>')
-    .replace(/\b([SHDC])([2-9TJQKA]+\b)/g, '<$1s></$1s>$2')
+    .replace(/\b([SHDC])([x2-9TJQKA]+\b)/g,
+             (m, n1, n2) => `<${n1}s></${n1}s>` + small_space_cards(n2))
     .replace(/__(.*?)__/g, '<u>$1</u>')
     .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-    .replace(/\(([0-9]+)\)/g, function(m, n) { return '&#' + (9311 + Number(n)); })
+    .replace(/\(([0-9]+)\)/g, (m, n) => '&#' + (9311 + Number(n)))
     .replace(/, /g, '，');
 }
 
@@ -113,8 +114,9 @@ function render_md_auction(md_auction) {
   rows = transform(root.childNodes[0].nodeValue).split('\n').slice(1, -1);
   if (rows[0].split('|').length == 2)
     return render_pair_auction(rows);
-  else
-    return render_full_auction(rows);
+  else {
+    return render_full_auction(rows, md_auction.classList);
+  }
 }
 
 function align_bid_cmt(bid_cmt) {
@@ -166,12 +168,27 @@ function render_pair_auction(rows) {
   }
 }
 
-function render_full_auction(rows) {
-  info = '';
-  hands = ['', '', '', ''];
+function num_cards_from_classes(class_list) {
+  for (name of class_list) {
+    if (name.match(/-card/))
+      return name.split('-')[0];
+  }
+  return 13;
+}
+
+function render_full_auction(rows, class_list) {
+  const num_cards = num_cards_from_classes(class_list);
+  const declare = class_list.contains('declare');
+
+  let info = '';
+  let lead = '';
+  const hands = ['', '', '', ''];
   for (row of rows.slice(0, 4)) {
     suits = row.split('|');
-    info += suits[0] + '<br/>';
+    if (suits[0].includes('攻'))
+      lead += suits[0] + '<br/>';
+    else
+      info += suits[0] + '<br/>';
     hands[1] += remove_suit_symbol(suits[1]) + ' ';
   }
   for (row of rows.slice(4, 8)) {
@@ -179,12 +196,14 @@ function render_full_auction(rows) {
     hands[0] += remove_suit_symbol(suits[0]) + ' ';
     hands[2] += remove_suit_symbol(suits[2]) + ' ';
   }
+  let info2 = '';
   for (row of rows.slice(8, 12)) {
     suits = row.split('|');
+    info2 += suits[0] + '<br/>';
     hands[3] += remove_suit_symbol(suits[1]) + ' ';
   }
-  bids = ['', '', '', ''];
-  notes = '';
+  const bids = ['', '', '', ''];
+  let notes = '';
   for (row of rows.slice(12)) {
     items = row.split('|').map(item => item.trim());
     if (items.length == 1 && items[0].trim().length > 4) {
@@ -205,24 +224,33 @@ function render_full_auction(rows) {
   const south = ns_vulnerable ? '<red>南</red>' : '南';
   const east = ew_vulnerable ? '<red>东</red>' : '东';
   const west = ew_vulnerable ? '<red>西</red>' : '西';
-  layout = '<table class="auction">' +
-   '<tr> <td>' + info + '</td>' + hand_to_html(hands[1]) + '</tr>' +
-    '<tr> ' + hand_to_html(hands[0]) +
-    '<td class="orientation">┌ ' + north + ' ┐<br>' +
-    west + '&emsp;&emsp;' + east + '<br>└ ' + south + ' ┘</td>' +
-    hand_to_html(hands[2]) + '</tr>' +
-    '<tr> <td></td>' + hand_to_html(hands[3]) + '</tr>' +
-    '</table>';
+  const orientation = `<td class="orientation">┌ ${north} ┐<br>
+                                       ${west}&emsp;&emsp;${east}<br>
+                                               └ ${south} ┘</td>`;
+  const north_hand = hand_to_html(hands[1], 1, num_cards);
+  const south_hand = hand_to_html(hands[3], 1, num_cards);
+  const east_hand = declare ? '<td></td>' : hand_to_html(hands[2], 1, num_cards);
+  const west_hand = declare ? '<td class="hand">' + lead + '</td>'
+                            : hand_to_html(hands[0], 1, num_cards);
+  layout = `
+    <table class="auction">
+      <tr><td>${info}</td>${north_hand}</tr>
+      <tr>${west_hand}${orientation}${east_hand}</tr>
+      <tr><td>${info2}</td>${south_hand}</tr>
+    </table>`;
   for (i = 0; i < bids.length; ++i) {
     bids[i] = bids[i].replace(/北/g, north).replace(/南/g, south)
                      .replace(/东/g, east).replace(/西/g, west);
   }
-  auction = '<table class="auction">' +
-    '<td class="bid">' + bids[0] + '</td>' +
-    '<td class="bid">' + bids[1] + '</td>' +
-    '<td class="bid">' + bids[2] + '</td>' +
-    '<td class="bid">' + bids[3] + '</td>' +
-    '</table>';
+  let auction = '';
+  if (bids[0]) {
+    auction = '<table class="auction">' +
+      '<td class="bid">' + bids[0] + '</td>' +
+      '<td class="bid">' + bids[1] + '</td>' +
+      '<td class="bid">' + bids[2] + '</td>' +
+      '<td class="bid">' + bids[3] + '</td>' +
+      '</table>';
+  }
   return '<table> <td>' + layout + '</td> <td>' + auction + notes + '</td> </table>';
 }
 
@@ -294,12 +322,12 @@ function render_cell(cell, is_header) {
   }
 }
 
-function check_hand(hand) {
+function check_hand(hand, num_cards=13) {
   cards = hand.replace(/[ -]/g, '');
-  if (cards.length != 13)
-    console.log('ERROR: ' + cards.length + ' cards with ' + hand);
-  if (cards.match(/[x2-9TJQKA]/g).length != 13)
-    console.log('ERROR: invalid cards in ' + hand);
+  if (cards.length != num_cards)
+    console.log(`ERROR: ${cards.length} cards with ${hand}, should be ${num_cards}`);
+  if (cards.match(/[x2-9TJQKA]/g).length != num_cards)
+    console.log(`ERROR: invalid cards in ${hand}`);
 }
 
 function count_points(hand) {
@@ -317,8 +345,8 @@ function space_cards(suit) {
     .replace(/\b(T|10)\b/g, '<font style="letter-spacing:-2px">1</font>0');
 }
 
-function hand_to_html(hand, colspan=1) {
-  check_hand(hand);
+function hand_to_html(hand, colspan=1, num_cards) {
+  check_hand(hand, num_cards);
   hcp = count_points(hand);
 
   suits = hand.replace(/10/g, 'T').split(' ');
@@ -330,20 +358,15 @@ function hand_to_html(hand, colspan=1) {
       suits[s] = '<font style="letter-spacing:' + space + 'px">' + suits[s] + '</font>';
     }
   }
-  html = `
-     <td class='hand' colspan='${colspan}'>
-       <abbr title='${hcp}大牌点'>
-         <ss>S</ss> <br/>
-         <hs>H</hs> <br/>
-         <ds>D</ds> <br/>
-         <cs>C</cs> <br/>
-       </abbr>
-     </td>`;
-  return html
-    .replace(/\bS\b/, suits[0])
-    .replace(/\bH\b/, suits[1])
-    .replace(/\bD\b/, suits[2])
-    .replace(/\bC\b/, suits[3]);
+  return `
+    <td class='hand' colspan='${colspan}'>
+      <abbr title='${hcp}大牌点'>
+        <ss>${suits[0]}</ss> <br/>
+        <hs>${suits[1]}</hs> <br/>
+        <ds>${suits[2]}</ds> <br/>
+        <cs>${suits[3]}</cs> <br/>
+      </abbr>
+    </td>`;
 }
 
 function small_space_cards(suit) {
@@ -360,14 +383,9 @@ function hand_to_html_line(hand) {
   for (s in suits) {
     suits[s] = small_space_cards(suits[s]);
   }
-  html = `
-       <abbr title='${hcp}大牌点'>
-         <ss>S</ss> <hs>H</hs> <ds>D</ds> <cs>C</cs>
-       </abbr>`;
-  return html
-    .replace(/\bS\b/, suits[0])
-    .replace(/\bH\b/, suits[1])
-    .replace(/\bD\b/, suits[2])
-    .replace(/\bC\b/, suits[3]);
+  return `
+    <abbr title='${hcp}大牌点'>
+      <ss>${suits[0]}</ss> <hs>${suits[1]}</hs> <ds>${suits[2]}</ds> <cs>${suits[3]}</cs>
+    </abbr>`;
 }
 
