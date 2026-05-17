@@ -4,6 +4,9 @@
   @top-left {
     content: normal;
   }
+  @top-center {
+    content: normal;
+  }
   @top-right {
     content: normal;
   }
@@ -16,29 +19,46 @@
 }
 @page {
   font-family: DejaVu, NotoSansSC;
+  margin-bottom: 0.5in;
+  margin-top: 1.0in;
   size: letter;
 }
 @page:left {
   counter-increment: page_num;
-  @top-left {
-    content: string(chapter) ' ➤ ' string(section) ' ➤ ' string(subsection);
+  @top-center {
+    border-bottom: 1px solid black;
+    content: string(chapter) '\2003' string(section) '\2003' string(subsection);
     font-size: smaller;
+    margin-bottom: 1.5em;
+    padding-top: 3.5em;
+    width: 100%;
   }
-  @bottom-left {
+  @top-left {
     content: counter(page_num);
     font-size: smaller;
+    margin-bottom: 1.5em;
+    padding-top: 3.5em;
   }
 }
 @page:right {
   counter-increment: page_num;
-  @top-right {
-    content: string(chapter) ' ➤ ' string(section) ' ➤ ' string(subsection);
+  @top-center {
+    border-bottom: 1px solid black;
+    content: string(chapter) '\2003' string(section) '\2003' string(subsection);
     font-size: smaller;
+    margin-bottom: 1.5em;
+    padding-top: 3.5em;
+    width: 100%;
   }
-  @bottom-right {
+  @top-right {
     content: counter(page_num);
     font-size: smaller;
+    margin-bottom: 1.5em;
+    padding-top: 3.5em;
   }
+}
+body {
+  padding: 0in 0in;
 }
 h1, h2 {
   string-set: chapter content(), section '', subsection '';
