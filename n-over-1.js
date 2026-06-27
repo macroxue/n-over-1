@@ -68,6 +68,7 @@ function render_text() {
 function render_external_links() {
   links = document.getElementsByClassName('external');
   for (link of links) {
+    link.setAttribute('target', '_blank');
     href = link.getAttribute('href');
     new_node = document.createElement("span");
     new_node.setAttribute('class', 'footnote');
